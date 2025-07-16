@@ -11,6 +11,7 @@ import { PrismaService } from 'src/prisma/prisma.service'
 import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common/helpers/prisma-error'
 import { TokenService } from '../token/token.service'
 import { RolesService } from './roles.service'
+import { RegisterBodyDto } from './dto/register-auth.dto'
 
 @Injectable()
 export class AuthService {
@@ -20,7 +21,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly rolesService: RolesService,
   ) {}
-  async register(body: any) {
+  async register(body: RegisterBodyDto) {
     try {
       const clientRoleId = await this.rolesService.getClientRoleId()
       const hasPassword = await this.hashService.hash(body.password)
@@ -43,8 +44,8 @@ export class AuthService {
       if (isUniqueConstraintPrismaError(error)) {
         throw new BadRequestException([
           {
-            field: 'email',
-            error: 'Email already exists',
+            path: 'email',
+            message: 'Email already exists',
           },
         ])
       } else {
@@ -60,8 +61,8 @@ export class AuthService {
       if (!user) {
         throw new NotFoundException([
           {
-            field: 'email',
-            error: 'Account does not exists',
+            path: 'email',
+            message: 'Account does not exists',
           },
         ]) // Email is not registered.
       }
@@ -102,7 +103,7 @@ export class AuthService {
         token: refreshToken,
         userId: payload.userId,
         expiresAt: new Date(decodedRefreshToken.exp * 1000),
-        deviceId: 1
+        deviceId: 1,
       },
     })
     return { accessToken, refreshToken }

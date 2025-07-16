@@ -4,10 +4,27 @@ import { AppService } from './app.service'
 import { PrismaModule } from './prisma/prisma.module'
 import { HashService } from './libs/crypto/hash.service'
 import { TokenModule } from './modules/token/token.module'
+import { AuthModule } from './modules/auth/auth.module'
+import CustomZodValidationPipe from './common/pipes/custom-zod-validation.pipe'
+import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
+import { ZodSerializerInterceptor } from 'nestjs-zod'
+import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 
 @Module({
-  imports: [PrismaModule, TokenModule],
+  imports: [PrismaModule, TokenModule, AuthModule],
   controllers: [AppController],
-  providers: [AppService, HashService],
+  providers: [
+    AppService,
+    HashService,
+    {
+      provide: APP_PIPE,
+      useClass: CustomZodValidationPipe,
+    },
+    { provide: APP_INTERCEPTOR, useClass: ZodSerializerInterceptor },
+    {
+      provide: APP_FILTER,
+      useClass: HttpExceptionFilter,
+    },
+  ],
 })
 export class AppModule {}

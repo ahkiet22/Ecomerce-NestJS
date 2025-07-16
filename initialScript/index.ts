@@ -18,7 +18,7 @@ const main = async () => {
         description: 'Admin role',
       },
       {
-        name: RoleName.Admin,
+        name: RoleName.Client,
         description: 'Client role',
       },
       {
