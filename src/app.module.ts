@@ -9,9 +9,10 @@ import CustomZodValidationPipe from './common/pipes/custom-zod-validation.pipe'
 import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
 import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter'
+import { CommonModule } from './common/common.module'
 
 @Module({
-  imports: [PrismaModule, TokenModule, AuthModule],
+  imports: [PrismaModule, TokenModule, AuthModule, CommonModule],
   controllers: [AppController],
   providers: [
     AppService,

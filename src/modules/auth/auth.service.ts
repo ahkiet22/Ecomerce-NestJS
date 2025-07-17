@@ -12,8 +12,13 @@ import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common
 import { TokenService } from '../token/token.service'
 import { RolesService } from './roles.service'
 import { RegisterBodyDto } from './dto/register-auth.dto'
-import { RegisterBodyType } from './schema/auth.shema'
+import { RegisterBodyType, SendOTPBodyType } from './schema/auth.shema'
 import { AuthRepository } from './auth.repository'
+import { CommonUserRepository } from 'src/common/repositories/common-user.repository'
+import { generateOTP } from 'src/common/helpers/generate-otp'
+import { addMilliseconds } from 'date-fns'
+import ms from 'ms'
+import envConfig from 'src/configs/validation'
 
 @Injectable()
 export class AuthService {
@@ -23,6 +28,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly rolesService: RolesService,
     private readonly authRepository: AuthRepository,
+    private readonly commonUserRepository: CommonUserRepository,
   ) {}
   async register(body: RegisterBodyType) {
     try {
@@ -51,6 +57,29 @@ export class AuthService {
     }
   }
 
+  async sendOTP(body: SendOTPBodyType) {
+    // 1. Kiểm tra email đã tồn tại trong db chưa
+    const user = await this.commonUserRepository.findUnique({ email: body.email })
+    if (user) {
+      throw new BadRequestException([
+        {
+          path: 'email',
+          message: 'Email already exists',
+        },
+      ])
+    }
+    // 2. Tạo mã OTP
+    const code = generateOTP()
+    const verifycationCode = this.authRepository.createVerificationCode({
+      email: body.email,
+      code,
+      type: body.type,
+      expiresAt: addMilliseconds(new Date(), ms(envConfig.OTP_EXPIRES_IN)),
+    })
+    // 3. Gửi mã OTP
+    return verifycationCode
+  }
+
   async login(body: any) {
     try {
       const user = await this.prismaService.user.findFirst({ where: { email: body.email } })
@@ -67,8 +96,8 @@ export class AuthService {
       if (!isPasswordMatch) {
         throw new UnauthorizedException([
           {
-            field: 'password',
-            errors: 'Incorrect password',
+            path: 'password',
+            message: 'Incorrect password',
           },
         ])
       }

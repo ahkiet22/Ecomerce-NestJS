@@ -13,6 +13,7 @@ import { AuthService } from './auth.service'
 import { AccessTokenGuard } from 'src/common/guards/access-token.guard'
 import { RegisterBodyDto, RegisterResDto } from './dto/register-auth.dto'
 import { ZodSerializerDto } from 'nestjs-zod'
+import { SendOTPBodyDto } from './dto/send-otp.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -20,8 +21,13 @@ export class AuthController {
 
   @Post('register')
   @ZodSerializerDto(RegisterResDto)
-  register(@Body() body: RegisterBodyDto) {
-    return this.authService.register(body)
+  async register(@Body() body: RegisterBodyDto) {
+    return await this.authService.register(body)
+  }
+
+  @Post('otp')
+  sendOTP(@Body() body: SendOTPBodyDto) {
+    return this.authService.sendOTP(body)
   }
 
   @Post('login')
