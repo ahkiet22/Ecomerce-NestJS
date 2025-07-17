@@ -12,6 +12,8 @@ import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common
 import { TokenService } from '../token/token.service'
 import { RolesService } from './roles.service'
 import { RegisterBodyDto } from './dto/register-auth.dto'
+import { RegisterBodyType } from './schema/auth.shema'
+import { AuthRepository } from './auth.repository'
 
 @Injectable()
 export class AuthService {
@@ -20,25 +22,19 @@ export class AuthService {
     private readonly prismaService: PrismaService,
     private readonly tokenService: TokenService,
     private readonly rolesService: RolesService,
+    private readonly authRepository: AuthRepository,
   ) {}
-  async register(body: RegisterBodyDto) {
+  async register(body: RegisterBodyType) {
     try {
       const clientRoleId = await this.rolesService.getClientRoleId()
       const hasPassword = await this.hashService.hash(body.password)
-      const user = await this.prismaService.user.create({
-        data: {
-          email: body.email,
-          password: hasPassword,
-          name: body.name,
-          phoneNumber: body.phoneNumber,
-          roleId: clientRoleId,
-        },
-        omit: {
-          password: true,
-          totpSecret: true,
-        },
+      return await this.authRepository.createUser({
+        email: body.email,
+        name: body.name,
+        phoneNumber: body.phoneNumber,
+        password: hasPassword,
+        roleId: clientRoleId,
       })
-      return user
     } catch (error) {
       console.log(error)
       if (isUniqueConstraintPrismaError(error)) {
