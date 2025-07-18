@@ -14,3 +14,8 @@ export const ConditionGuard = {
 } as const
 
 export type ConditionGuardType = (typeof ConditionGuard)[keyof typeof ConditionGuard]
+
+export enum TypeOfVerificationCodeType {
+  REGISTER = 'REGISTER',
+  FORGOT_PASSWORD = 'FORGOT_PASSWORD',
+}

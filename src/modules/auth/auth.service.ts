@@ -5,6 +5,7 @@ import {
   InternalServerErrorException,
   NotFoundException,
   UnauthorizedException,
+  UnprocessableEntityException,
 } from '@nestjs/common'
 import { HashService } from '../../libs/crypto/hash.service'
 import { PrismaService } from 'src/prisma/prisma.service'
@@ -19,6 +20,7 @@ import { generateOTP } from 'src/common/helpers/generate-otp'
 import { addMilliseconds } from 'date-fns'
 import ms from 'ms'
 import envConfig from 'src/configs/validation'
+import { TypeOfVerificationCodeType } from 'src/common/constants/auth.constant'
 
 @Injectable()
 export class AuthService {
@@ -32,6 +34,28 @@ export class AuthService {
   ) {}
   async register(body: RegisterBodyType) {
     try {
+      const verificationCode = await this.authRepository.findUniqueVerificationCode({
+        email: body.email,
+        code: body.code,
+        type: TypeOfVerificationCodeType.REGISTER,
+      })
+      if (!verificationCode) {
+        throw new UnprocessableEntityException([
+          {
+            path: 'code',
+            message: 'Invalid OTP code',
+          },
+        ])
+      }
+
+      if (verificationCode.expiresAt < new Date()) {
+        throw new UnprocessableEntityException([
+          {
+            path: 'code',
+            message: 'OTP code has expired',
+          },
+        ])
+      }
       const clientRoleId = await this.rolesService.getClientRoleId()
       const hasPassword = await this.hashService.hash(body.password)
       return await this.authRepository.createUser({
@@ -128,7 +152,6 @@ export class AuthService {
         token: refreshToken,
         userId: payload.userId,
         expiresAt: new Date(decodedRefreshToken.exp * 1000),
-        deviceId: 1,
       },
     })
     return { accessToken, refreshToken }
