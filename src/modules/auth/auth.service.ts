@@ -12,8 +12,13 @@ import { PrismaService } from 'src/prisma/prisma.service'
 import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common/helpers/prisma-error'
 import { TokenService } from '../token/token.service'
 import { RolesService } from './roles.service'
-import { RegisterBodyDto } from './dto/register-auth.dto'
-import { LoginBodyType, RefreshTokenBodyType, RegisterBodyType, SendOTPBodyType } from './schema/auth.shema'
+import {
+  LoginBodyType,
+  LogoutBodytype,
+  RefreshTokenBodyType,
+  RegisterBodyType,
+  SendOTPBodyType,
+} from './schema/auth.shema'
 import { AuthRepository } from './auth.repository'
 import { CommonUserRepository } from 'src/common/repositories/common-user.repository'
 import { generateOTP } from 'src/common/helpers/generate-otp'
@@ -219,27 +224,27 @@ export class AuthService {
     } catch (error) {
       console.log(error)
 
-      if(error instanceof HttpException) {
+      if (error instanceof HttpException) {
         throw error
       }
       throw new UnauthorizedException()
     }
   }
 
-  async logout(refreshToken: string) {
+  async logout({ refreshToken }: LogoutBodytype) {
     try {
+      // 1. check refreshTken
+      await this.tokenService.verifyRefreshToken(refreshToken)
       // 2.  Delete refreshToken
-      await this.prismaService.refreshToken.delete({
-        where: {
-          token: refreshToken,
-        },
-      })
+      const deleteRefreshToken = await this.authRepository.deleteRefreshToken({ token: refreshToken })
+      // 3. update device (isActive=false)
+      await this.authRepository.updateDevice(deleteRefreshToken.deviceId, { isActive: false })
       return { message: 'Logout successfully' }
     } catch (error) {
       console.log(error)
 
       if (isNotFoundPrismaError(error)) {
-        throw new UnauthorizedException()
+        throw new UnauthorizedException('Refresh token has been revoked')
       }
       throw new UnauthorizedException()
     }

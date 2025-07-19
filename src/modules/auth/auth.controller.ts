@@ -19,6 +19,7 @@ import { SendOTPBodyDto } from './dto/send-otp.dto'
 import { LoginBodyDto, LoginResDto } from './dto/login-auth.dto'
 import { UserAgent } from 'src/common/decorators/user-agent.decorator'
 import { RefreshTokenBodyDto, RefreshTokenResDto } from './dto/refresh-token.dto'
+import { LogoutBodyDto } from './dto/logout.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -60,7 +61,7 @@ export class AuthController {
 
   @Post('logout')
   @HttpCode(HttpStatus.OK)
-  logout(@Body() body: any) {
-    return this.authService.logout(body.refreshToken)
+  logout(@Body() body: LogoutBodyDto) {
+    return this.authService.logout({ refreshToken: body.refreshToken })
   }
 }
