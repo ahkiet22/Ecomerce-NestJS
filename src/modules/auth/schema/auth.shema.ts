@@ -2,6 +2,7 @@ import { UserStatus, VerificationCodeType as TypeOfVerificationCode } from '@pri
 import { UserSchema } from 'src/common/models/user.model'
 import { z } from 'zod'
 
+// ** REGISTER
 export const RegisterBodySchema = UserSchema.pick({
   email: true,
   password: true,
@@ -32,7 +33,8 @@ export const RegisterResSchema = UserSchema.omit({
 
 export type RegisterResType = z.infer<typeof RegisterResSchema>
 
-export const VerificationCodeSchema = z.object({
+// ** OTP
+export const VerificationCode = z.object({
   id: z.number(),
   email: z.string().email(),
   code: z.string().length(6),
@@ -41,11 +43,65 @@ export const VerificationCodeSchema = z.object({
   createdAt: z.date(),
 })
 
-export type VerificationCodeType = z.infer<typeof VerificationCodeSchema>
+export type VerificationCodeType = z.infer<typeof VerificationCode>
 
-export const SendOTPBodySchema = VerificationCodeSchema.pick({
+export const SendOTPBodySchema = VerificationCode.pick({
   email: true,
   type: true,
 }).strict()
 
 export type SendOTPBodyType = z.infer<typeof SendOTPBodySchema>
+
+// ** LOGIN
+export const LoginBodySchema = UserSchema.pick({
+  email: true,
+  password: true,
+}).strict()
+
+export type LoginBodyType = z.infer<typeof LoginBodySchema>
+
+export const LoginResSchema = z.object({
+  accessToken: z.string(),
+  refreshToken: z.string(),
+})
+
+export type LoginResType = z.infer<typeof LoginResSchema>
+
+// ** RefreshToken
+export const RefreshTokenBodySchema = z
+  .object({
+    refreshToken: z.string(),
+  })
+  .strict()
+
+export type RefreshTokenBodyType = z.infer<typeof RefreshTokenBodySchema>
+
+export const RefreshTokenResSchema = LoginResSchema
+export type RefreshTokenResType = LoginResType
+
+// ** DIVCE
+export const DeviceSchema = z.object({
+  id: z.number(),
+  userId: z.number(),
+  userAgent: z.string(),
+  ip: z.string(),
+  lastActive: z.date(),
+  createAt: z.date(),
+  isActive: z.boolean(),
+})
+
+export type DeviceType = z.infer<typeof DeviceSchema>
+
+export const RoleSchema = z.object({
+  id: z.number(),
+  name: z.string(),
+  description: z.string(),
+  isActive: z.boolean(),
+  createdById: z.number().nullable(),
+  updatedById: z.number().nullable(),
+  deletedAt: z.date().nullable(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+})
+
+export type RoleType = z.infer<typeof RoleSchema>

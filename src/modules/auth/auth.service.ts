@@ -13,7 +13,7 @@ import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common
 import { TokenService } from '../token/token.service'
 import { RolesService } from './roles.service'
 import { RegisterBodyDto } from './dto/register-auth.dto'
-import { RegisterBodyType, SendOTPBodyType } from './schema/auth.shema'
+import { LoginBodyType, RegisterBodyType, SendOTPBodyType } from './schema/auth.shema'
 import { AuthRepository } from './auth.repository'
 import { CommonUserRepository } from 'src/common/repositories/common-user.repository'
 import { generateOTP } from 'src/common/helpers/generate-otp'
@@ -21,6 +21,8 @@ import { addMilliseconds } from 'date-fns'
 import ms from 'ms'
 import envConfig from 'src/configs/validation'
 import { TypeOfVerificationCodeType } from 'src/common/constants/auth.constant'
+import { EmailService } from 'src/libs/email/email.service'
+import { AccessTokenPayloadCreate } from 'src/types/jwt'
 
 @Injectable()
 export class AuthService {
@@ -31,6 +33,7 @@ export class AuthService {
     private readonly rolesService: RolesService,
     private readonly authRepository: AuthRepository,
     private readonly commonUserRepository: CommonUserRepository,
+    private readonly emailService: EmailService,
   ) {}
   async register(body: RegisterBodyType) {
     try {
@@ -101,12 +104,25 @@ export class AuthService {
       expiresAt: addMilliseconds(new Date(), ms(envConfig.OTP_EXPIRES_IN)),
     })
     // 3. Gửi mã OTP
+    const { error } = await this.emailService.sendOTP({
+      email: body.email,
+      code,
+    })
+    if (error) {
+      console.error('Error sending OTP:', error)
+      throw new UnprocessableEntityException([
+        {
+          path: 'code',
+          message: 'OTP code sending failed',
+        },
+      ])
+    }
     return verifycationCode
   }
 
-  async login(body: any) {
+  async login(body: LoginBodyType & { userAgent: string; ip: string }) {
     try {
-      const user = await this.prismaService.user.findFirst({ where: { email: body.email } })
+      const user = await this.authRepository.findUniqueUserIncludeRole({ email: body.email })
       if (!user) {
         throw new NotFoundException([
           {
@@ -125,8 +141,17 @@ export class AuthService {
           },
         ])
       }
-
-      const tokens = await this.generateTokens({ userId: user.id })
+      const device = await this.authRepository.createDevice({
+        userId: user.id,
+        userAgent: body.userAgent,
+        ip: body.ip,
+      })
+      const tokens = await this.generateTokens({
+        userId: user.id,
+        deviceId: device.id,
+        roleId: user.roleId,
+        roleName: user.role.name,
+      })
       return tokens
     } catch (error) {
       // 1) Log nội bộ
@@ -141,18 +166,22 @@ export class AuthService {
     }
   }
 
-  async generateTokens(payload: { userId: number }) {
+  async generateTokens({ userId, deviceId, roleId, roleName }: AccessTokenPayloadCreate) {
     const [accessToken, refreshToken] = await Promise.all([
-      this.tokenService.signAccessToken(payload),
-      this.tokenService.signRefreshToken(payload),
+      this.tokenService.signAccessToken({
+        userId,
+        deviceId,
+        roleId,
+        roleName,
+      }),
+      this.tokenService.signRefreshToken({ userId }),
     ])
     const decodedRefreshToken = await this.tokenService.verifyRefreshToken(refreshToken)
-    await this.prismaService.refreshToken.create({
-      data: {
-        token: refreshToken,
-        userId: payload.userId,
-        expiresAt: new Date(decodedRefreshToken.exp * 1000),
-      },
+    await this.authRepository.createRRefreshToken({
+      token: refreshToken,
+      userId,
+      expiresAt: new Date(decodedRefreshToken.exp * 1000),
+      deviceId,
     })
     return { accessToken, refreshToken }
   }
@@ -194,7 +223,7 @@ export class AuthService {
       })
       // 4. create new accessToken and refreshToken
       if (tokens) {
-        return this.generateTokens({ userId })
+        // return this.generateTokens({ userId })
       }
 
       // 5. protect

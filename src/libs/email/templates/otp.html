@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{{subject}}</title>
+</head>
+<body style="margin:0;padding:0;font-family:Segoe UI,Arial,sans-serif;background-color:#f5f7fa;">
+  <div style="max-width:520px;margin:40px auto;padding:20px;">
+    <div style="border-radius:20px;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.08);overflow:hidden;">
+      
+      <!-- Header -->
+      <div style="background:linear-gradient(135deg,#4361ee 0%,#4cc9f0 100%);text-align:center;padding:40px 20px;">
+        <h1 style="color:#fff;font-size:28px;margin:0;">Email Verification</h1>
+      </div>
+
+      <!-- Content -->
+      <div style="padding:32px;font-size:16px;line-height:1.5;color:#212529;">
+        <p style="margin-bottom:16px;">Hi <strong style="color:#4361ee;">{{email}}</strong>,</p>
+        <p style="margin-bottom:24px;">
+          Thank you for registering an account with us! To complete your sign-up and verify your email address, please use the verification code below:
+        </p>
+
+        <!-- OTP Block -->
+        <div style="text-align:center;margin-bottom:32px;">
+          <div style="display:inline-block;background:#f8f9fa;border-radius:12px;padding:20px 30px;border:1px solid #dee2e6;">
+            <span style="display:block;margin-bottom:8px;font-weight:500;">Your verification code</span>
+            <span style="font-family:monospace;font-size:32px;letter-spacing:6px;color:#4361ee;">{{code}}</span>
+          </div>
+          <div style="margin-top:16px;font-size:14px;color:#212529;">This code will expire in 5 minutes.</div>
+        </div>
+
+        <!-- Divider -->
+        <hr style="border:none;border-top:1px solid #dee2e6;margin:24px 0;" />
+
+        <!-- Support Note -->
+        <p style="font-size:15px;text-align:center;margin:0;">
+          If you did not create an account using this email, please ignore this message or contact our
+          <a href="#" style="color:#4361ee;text-decoration:none;font-weight:500;">support team</a>.
+        </p>
+      </div>
+
+      <!-- Footer -->
+      <div style="text-align:center;padding: 0px 20px 20px 20px;font-size:12px;color:#777;">
+        <p style="margin:0;">&copy; ${new Date().getFullYear()} SecureAuth Inc. All rights reserved.</p>
+        <p style="margin-top:8px;font-size:13px;color:#b91c1c;">
+          This is an automated email. Do not reply or share this code with anyone.
+        </p>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

@@ -10,6 +10,7 @@ import { APP_FILTER, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core'
 import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 import { CommonModule } from './common/common.module'
+import { EmailService } from './libs/email/email.service'
 
 @Module({
   imports: [PrismaModule, TokenModule, AuthModule, CommonModule],
@@ -17,6 +18,7 @@ import { CommonModule } from './common/common.module'
   providers: [
     AppService,
     HashService,
+    EmailService,
     {
       provide: APP_PIPE,
       useClass: CustomZodValidationPipe,

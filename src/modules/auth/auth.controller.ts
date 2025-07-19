@@ -5,6 +5,7 @@ import {
   HttpCode,
   HttpStatus,
   Post,
+  Req,
   SerializeOptions,
   UseGuards,
   UseInterceptors,
@@ -14,6 +15,10 @@ import { AccessTokenGuard } from 'src/common/guards/access-token.guard'
 import { RegisterBodyDto, RegisterResDto } from './dto/register-auth.dto'
 import { ZodSerializerDto } from 'nestjs-zod'
 import { SendOTPBodyDto } from './dto/send-otp.dto'
+import { LoginBodyDto } from './dto/login-auth.dto'
+import { Request } from 'express'
+import { UserAgent } from 'src/common/decorators/user-agent.decorator'
+import { IP } from 'src/common/decorators/ip.decorator'
 
 @Controller('auth')
 export class AuthController {
@@ -32,8 +37,12 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  login(@Body() body: any) {
-    return this.authService.login(body)
+  login(@Body() body: LoginBodyDto, @UserAgent() userAgent: string, @IP() ip: string) {
+    return this.authService.login({
+      ...body,
+      userAgent,
+      ip,
+    })
   }
 
   @Post('refresh-token')
