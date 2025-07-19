@@ -4,6 +4,7 @@ import {
   Controller,
   HttpCode,
   HttpStatus,
+  Ip,
   Post,
   Req,
   SerializeOptions,
@@ -18,7 +19,6 @@ import { SendOTPBodyDto } from './dto/send-otp.dto'
 import { LoginBodyDto } from './dto/login-auth.dto'
 import { Request } from 'express'
 import { UserAgent } from 'src/common/decorators/user-agent.decorator'
-import { IP } from 'src/common/decorators/ip.decorator'
 
 @Controller('auth')
 export class AuthController {
@@ -37,7 +37,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
-  login(@Body() body: LoginBodyDto, @UserAgent() userAgent: string, @IP() ip: string) {
+  login(@Body() body: LoginBodyDto, @UserAgent() userAgent: string, @Ip() ip: string) {
     return this.authService.login({
       ...body,
       userAgent,
