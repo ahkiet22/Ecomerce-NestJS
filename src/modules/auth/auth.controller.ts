@@ -16,9 +16,9 @@ import { AccessTokenGuard } from 'src/common/guards/access-token.guard'
 import { RegisterBodyDto, RegisterResDto } from './dto/register-auth.dto'
 import { ZodSerializerDto } from 'nestjs-zod'
 import { SendOTPBodyDto } from './dto/send-otp.dto'
-import { LoginBodyDto } from './dto/login-auth.dto'
-import { Request } from 'express'
+import { LoginBodyDto, LoginResDto } from './dto/login-auth.dto'
 import { UserAgent } from 'src/common/decorators/user-agent.decorator'
+import { RefreshTokenBodyDto, RefreshTokenResDto } from './dto/refresh-token.dto'
 
 @Controller('auth')
 export class AuthController {
@@ -26,8 +26,8 @@ export class AuthController {
 
   @Post('register')
   @ZodSerializerDto(RegisterResDto)
-  async register(@Body() body: RegisterBodyDto) {
-    return await this.authService.register(body)
+  register(@Body() body: RegisterBodyDto) {
+    return this.authService.register(body)
   }
 
   @Post('otp')
@@ -37,6 +37,7 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(HttpStatus.OK)
+  @ZodSerializerDto(LoginResDto)
   login(@Body() body: LoginBodyDto, @UserAgent() userAgent: string, @Ip() ip: string) {
     return this.authService.login({
       ...body,
@@ -48,8 +49,13 @@ export class AuthController {
   @Post('refresh-token')
   @UseGuards(AccessTokenGuard)
   @HttpCode(HttpStatus.OK)
-  refreshToken(@Body() body: any) {
-    return this.authService.refreshToken(body.refreshToken)
+  @ZodSerializerDto(RefreshTokenResDto)
+  refreshToken(@Body() body: RefreshTokenBodyDto, @UserAgent() userAgent: string, @Ip() ip: string) {
+    return this.authService.refreshToken({
+      refreshToken: body.refreshToken,
+      userAgent,
+      ip,
+    })
   }
 
   @Post('logout')

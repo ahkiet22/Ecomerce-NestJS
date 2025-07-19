@@ -13,7 +13,7 @@ import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common
 import { TokenService } from '../token/token.service'
 import { RolesService } from './roles.service'
 import { RegisterBodyDto } from './dto/register-auth.dto'
-import { LoginBodyType, RegisterBodyType, SendOTPBodyType } from './schema/auth.shema'
+import { LoginBodyType, RefreshTokenBodyType, RegisterBodyType, SendOTPBodyType } from './schema/auth.shema'
 import { AuthRepository } from './auth.repository'
 import { CommonUserRepository } from 'src/common/repositories/common-user.repository'
 import { generateOTP } from 'src/common/helpers/generate-otp'
@@ -186,53 +186,41 @@ export class AuthService {
     return { accessToken, refreshToken }
   }
 
-  async refreshToken(refreshToken: string) {
+  async refreshToken({ refreshToken, ip, userAgent }: RefreshTokenBodyType & { userAgent: string; ip: string }) {
     try {
       // 1.verify token
-      const { userId, exp } = await this.tokenService.verifyRefreshToken(refreshToken)
+      const { userId } = await this.tokenService.verifyRefreshToken(refreshToken)
 
-      // Verify expired token
-      if (Date.now() > exp * 1000) {
-        await this.prismaService.refreshToken
-          .delete({
-            where: {
-              token: refreshToken,
-            },
-          })
-          .catch(() => null)
-        throw new UnauthorizedException('Token has expired')
+      // Sử dụng transaction để Tránh race-condition nếu cùng một token được refresh đồng thời (option) cacsh 2
+      // 2. verify refreshToken already in database
+      const refreshTokenInDb = await this.authRepository.findUniqueRefreshTokenIncludeUserRole({ token: refreshToken })
+      if (!refreshTokenInDb) {
+        throw new UnauthorizedException('Refresh token has been revoked')
       }
-
-      // Sử dụng transaction để Tránh race-condition nếu cùng một token được refresh đồng thời
-      const tokens = await this.prismaService.$transaction(async (tx) => {
-        // 2. verify refreshToken already in database
-        await tx.refreshToken.findUniqueOrThrow({
-          where: {
-            token: refreshToken,
-          },
-        })
-
-        // 3. Delete refreshToken old
-        await tx.refreshToken.delete({
-          where: {
-            token: refreshToken,
-          },
-        })
-
-        return true
+      const {
+        deviceId,
+        user: {
+          roleId,
+          role: { name: roleName },
+        },
+      } = refreshTokenInDb
+      // 3. Update device
+      const $updateDevice = this.authRepository.updateDevice(deviceId, {
+        ip,
+        userAgent,
       })
-      // 4. create new accessToken and refreshToken
-      if (tokens) {
-        // return this.generateTokens({ userId })
-      }
+      // 4. Delete refreshToken old
+      const $deleteRefreshToken = this.authRepository.deleteRefreshToken({ token: refreshToken })
+      // 5. create new accessToken and refreshToken
 
-      // 5. protect
-      throw new UnauthorizedException()
+      const $tokens = this.generateTokens({ userId, roleId, roleName, deviceId })
+      const [, , tokens] = await Promise.all([$updateDevice, $deleteRefreshToken, $tokens])
+      return tokens
     } catch (error) {
       console.log(error)
 
-      if (isNotFoundPrismaError(error)) {
-        throw new UnauthorizedException('Refresh token has been revoked')
+      if(error instanceof HttpException) {
+        throw error
       }
       throw new UnauthorizedException()
     }

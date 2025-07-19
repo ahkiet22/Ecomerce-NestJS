@@ -80,7 +80,7 @@ export const DeviceSchema = z.object({
   userAgent: z.string(),
   ip: z.string(),
   lastActive: z.date(),
-  createAt: z.date(),
+  createdAt: z.date(),
   isActive: z.boolean(),
 })
 
