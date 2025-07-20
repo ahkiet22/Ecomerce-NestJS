@@ -17,13 +17,24 @@ export class AuthRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   async createUser(
-    user: Omit<RegisterBodyType, 'confirmPassword' | 'code'> & Pick<UserType, 'roleId'>,
+    user: Pick<UserType, 'roleId' | 'email' | 'name' | 'password' | 'phoneNumber'>,
   ): Promise<RegisterResType> {
     return this.prismaService.user.create({
       data: user,
       omit: {
         password: true,
         totpSecret: true,
+      },
+    })
+  }
+
+  async createUserIncludeRole(
+    user: Pick<UserType, 'roleId' | 'email' | 'name' | 'password' | 'phoneNumber' | 'avatar'>,
+  ): Promise<Promise<UserType & { role: RoleType }>> {
+    return this.prismaService.user.create({
+      data: user,
+      include: {
+        role: true,
       },
     })
   }
