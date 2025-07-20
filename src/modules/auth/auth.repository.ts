@@ -114,4 +114,18 @@ export class AuthRepository {
       where: uniqueObject,
     })
   }
+
+  deleteVerificationCode(
+    uniqueValue:
+      | { id: number }
+      | {
+          email: string
+          code: string
+          type: TypeOfVerificationCodeType
+        },
+  ): Promise<VerificationCodeType> {
+    return this.prismaService.verificationCode.delete({
+      where: uniqueValue,
+    })
+  }
 }

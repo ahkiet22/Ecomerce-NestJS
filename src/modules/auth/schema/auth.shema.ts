@@ -90,7 +90,7 @@ export const GoogleAuthStateSchema = DeviceSchema.pick({
 })
 
 export const GetAuthorizationUrlResSchema = z.object({
-  url: z.string().url()
+  url: z.string().url(),
 })
 
 export const RoleSchema = z.object({
@@ -104,6 +104,24 @@ export const RoleSchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
 })
+
+export const ForgotPasswordBodySchema = z
+  .object({
+    email: z.string().email(),
+    code: z.string().length(6),
+    newPassword: z.string().min(6).max(100),
+    confirmNewPassword: z.string().min(6).max(100),
+  })
+  .strict()
+  .superRefine(({ confirmNewPassword, newPassword }, ctx) => {
+    if (confirmNewPassword !== newPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password and confirm new password must be same',
+        path: ['confirmNewPassword'],
+      })
+    }
+  })
 
 // ** Types
 export type LoginBodyType = z.infer<typeof LoginBodySchema>
@@ -120,3 +138,4 @@ export type RefreshTokenType = z.infer<typeof RefreshTokenSchema>
 export type LogoutBodytype = z.infer<typeof LogoutBodySchema>
 export type GoogleAuthStateType = z.infer<typeof GoogleAuthStateSchema>
 export type GetAuthorizationUrlResType = z.infer<typeof GetAuthorizationUrlResSchema>
+export type ForgotPasswordBodyType = z.infer<typeof ForgotPasswordBodySchema>
