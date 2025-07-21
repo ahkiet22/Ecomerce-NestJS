@@ -11,9 +11,10 @@ import { ZodSerializerInterceptor } from 'nestjs-zod'
 import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 import { CommonModule } from './common/common.module'
 import { EmailService } from './libs/email/email.service'
+import { LanguageModule } from './modules/language/language.module'
 
 @Module({
-  imports: [PrismaModule, TokenModule, AuthModule, CommonModule],
+  imports: [PrismaModule, TokenModule, AuthModule, LanguageModule, CommonModule],
   controllers: [AppController],
   providers: [
     AppService,
