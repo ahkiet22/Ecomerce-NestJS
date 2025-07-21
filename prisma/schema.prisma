@@ -120,7 +120,7 @@ model VerificationCode {
   expiresAt DateTime
   createdAt DateTime @default(now())
 
-  @@unique([email, code, type], name: "email_code_type")
+  @@unique([email, type], name: "email_code_type")
   @@index([expiresAt])
 }
 

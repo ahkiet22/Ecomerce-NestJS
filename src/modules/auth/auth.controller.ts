@@ -14,6 +14,9 @@ import { GetAuthorizationUrlResDto } from './dto/google-o2auth.dto'
 import { Response } from 'express'
 import envConfig from 'src/configs/validation'
 import { ForgotPasswordBodyDto } from './dto/forgot-password.dto'
+import { DisableTwoFactorBodyDTO, TwoFactorSetupResDTO } from './dto/2fa.dto'
+import { EmptyBodyDTO } from 'src/common/dtos/request.dto'
+import { ActiveUser } from 'src/common/decorators/active-user.decorator'
 
 @Controller('auth')
 export class AuthController {
@@ -94,5 +97,23 @@ export class AuthController {
   @ZodSerializerDto(MessageResDto)
   forgotPassword(@Body() body: ForgotPasswordBodyDto) {
     return this.authService.forgotPassword(body)
+  }
+
+  // Tại sao không dùng GET mà dùng POST? khi mà body gửi lên là {}
+  // Vì POST mang ý nghĩa là tạo ra cái gì đó và POST cũng bảo mật hơn GET
+  // Vì GET có thể được kích hoạt thông qua URL trên trình duyệt, POST thì không
+  @Post('2fa/setup')
+  @ZodSerializerDto(TwoFactorSetupResDTO)
+  setupTwoFactorAuth(@Body() _: EmptyBodyDTO, @ActiveUser('userId') userId: number) {
+    return this.authService.setupTwoFactorAuth(userId)
+  }
+
+  @Post('2fa/disable')
+  @ZodSerializerDto(MessageResDto)
+  disableTwoFactorAuth(@Body() body: DisableTwoFactorBodyDTO, @ActiveUser('userId') userId: number) {
+    return this.authService.disableTwoFactorAuth({
+      ...body,
+      userId,
+    })
   }
 }

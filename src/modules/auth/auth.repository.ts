@@ -46,7 +46,6 @@ export class AuthRepository {
       where: {
         email_code_type: {
           email: payload.email,
-          code: payload.code,
           type: payload.type,
         },
       },

@@ -54,6 +54,22 @@ export const LoginBodySchema = UserSchema.pick({
     code: z.string().length(6).optional(), // Email OTP code
   })
   .strict()
+  .superRefine(({ totpCode, code }, ctx) => {
+    // Nếu mà truyền cùng lúc totpCode và code thì sẽ add issue
+    const message = 'You should only pass the 2FA authentication code or the OTP code, not both'
+    if (totpCode !== undefined && code !== undefined) {
+      ctx.addIssue({
+        path: ['totpCode'],
+        message,
+        code: 'custom',
+      })
+      ctx.addIssue({
+        path: ['code'],
+        message,
+        code: 'custom',
+      })
+    }
+  })
 
 export const LoginResSchema = z.object({
   accessToken: z.string(),
@@ -133,8 +149,9 @@ export const DisableTwoFactorBodySchema = z
     totpCode: z.string().length(6).optional(), // 2FA code
     code: z.string().length(6).optional(), // Email OTP code
   })
+  .strict()
   .superRefine(({ totpCode, code }, ctx) => {
-    const message = 'You must provide either a 2FA verification code or an OTP code.'
+    const message = 'You should only pass the 2FA authentication code or the OTP code, not both'
 
     // Nếu cả hai đều có hoặc đều không có thì nhảy vào if
     if ((totpCode !== undefined) === (code !== undefined)) {
