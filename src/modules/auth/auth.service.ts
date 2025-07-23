@@ -10,7 +10,6 @@ import {
 import { HashService } from '../../libs/crypto/hash.service'
 import { isNotFoundPrismaError, isUniqueConstraintPrismaError } from 'src/common/helpers/prisma-error'
 import { TokenService } from '../token/token.service'
-import { RolesService } from './roles.service'
 import {
   DisableTwoFactorBodyType,
   ForgotPasswordBodyType,
@@ -43,15 +42,16 @@ import {
   UnauthorizedAccessException,
 } from './auth.error'
 import { TwoFactorService } from 'src/common/services/2fa.service'
+import { RolesRepository } from 'src/common/repositories/roles.repository'
 
 @Injectable()
 export class AuthService {
   constructor(
     private readonly hashService: HashService,
     private readonly tokenService: TokenService,
-    private readonly rolesService: RolesService,
     private readonly authRepository: AuthRepository,
     private readonly commonUserRepository: CommonUserRepository,
+    private readonly rolesRepository: RolesRepository,
     private readonly emailService: EmailService,
     private readonly twoFactorService: TwoFactorService,
   ) {}
@@ -88,7 +88,7 @@ export class AuthService {
         code: body.code,
         type: TypeOfVerificationCode.REGISTER,
       })
-      const clientRoleId = await this.rolesService.getClientRoleId()
+      const clientRoleId = await this.rolesRepository.getClientRoleId()
       const hashPassword = await this.hashService.hash(body.password)
       const [user] = await Promise.all([
         this.authRepository.createUser({

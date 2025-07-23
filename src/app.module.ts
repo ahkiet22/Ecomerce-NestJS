@@ -13,9 +13,10 @@ import { CommonModule } from './common/common.module'
 import { EmailService } from './libs/email/email.service'
 import { LanguageModule } from './modules/language/language.module'
 import { PermissionModule } from './modules/permission/permission.module'
+import { RoleModule } from './modules/role/role.module'
 
 @Module({
-  imports: [PrismaModule, TokenModule, AuthModule, LanguageModule, PermissionModule, CommonModule],
+  imports: [PrismaModule, TokenModule, AuthModule, LanguageModule, PermissionModule, RoleModule, CommonModule],
   controllers: [AppController],
   providers: [
     AppService,

@@ -5,12 +5,12 @@ import {
   RefreshTokenType,
   RegisterBodyType,
   RegisterResType,
-  RoleType,
   VerificationCodeType,
 } from './schema/auth.shema'
 import { UserType } from 'src/common/models/user.model'
 import { VerificationCode } from '@prisma/client'
 import { TypeOfVerificationCodeType } from 'src/common/constants/auth.constant'
+import { RoleType } from 'src/common/models/role.model'
 
 @Injectable()
 export class AuthRepository {

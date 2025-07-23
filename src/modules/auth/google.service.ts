@@ -5,10 +5,10 @@ import envConfig from 'src/configs/validation'
 import { GoogleAuthStateType } from './schema/auth.shema'
 import { AuthRepository } from './auth.repository'
 import { HashService } from 'src/libs/crypto/hash.service'
-import { RolesService } from './roles.service'
 import { v4 as uuidv4 } from 'uuid'
 import { AuthService } from './auth.service'
 import { GoogleUserInfoError } from './auth.error'
+import { RolesRepository } from 'src/common/repositories/roles.repository'
 
 @Injectable()
 export class GoogleService {
@@ -16,7 +16,7 @@ export class GoogleService {
   constructor(
     private readonly authRepository: AuthRepository,
     private readonly hashService: HashService,
-    private readonly rolesService: RolesService,
+    private readonly rolesRepository: RolesRepository,
     private readonly authService: AuthService,
   ) {
     this.oauth2Client = new google.auth.OAuth2(
@@ -77,7 +77,7 @@ export class GoogleService {
         email: data.email,
       })
       if (!user) {
-        const clientRoleId = await this.rolesService.getClientRoleId()
+        const clientRoleId = await this.rolesRepository.getClientRoleId()
         const randomPassword = uuidv4()
         const hashPassword = await this.hashService.hash(randomPassword)
         user = await this.authRepository.createUserIncludeRole({

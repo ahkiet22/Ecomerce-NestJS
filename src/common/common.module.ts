@@ -5,6 +5,7 @@ import { GuardsModule } from './guards/guards.module'
 import { APP_GUARD, Reflector } from '@nestjs/core'
 import { AuthenticationGuard } from './guards/auth.guard'
 import { TwoFactorService } from './services/2fa.service'
+import { RolesRepository } from './repositories/roles.repository'
 
 @Global()
 @Module({
@@ -13,11 +14,12 @@ import { TwoFactorService } from './services/2fa.service'
     Reflector,
     TwoFactorService,
     CommonUserRepository,
+    RolesRepository,
     {
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
     },
   ],
-  exports: [CommonUserRepository, TwoFactorService],
+  exports: [CommonUserRepository, TwoFactorService, RolesRepository],
 })
 export class CommonModule {}
