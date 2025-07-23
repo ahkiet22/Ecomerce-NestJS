@@ -178,9 +178,10 @@ model RefreshToken {
 model Permission {
   id          Int        @id @default(autoincrement())
   name        String     @db.VarChar(500)
-  description String
+  description String     @default("")
   path        String     @db.VarChar(1000)
   method      HTTPMethod
+  module      String     @default("") @db.VarChar(500)
   roles       Role[]
 
   createdById Int?
@@ -200,7 +201,7 @@ model Permission {
 model Role {
   id          Int          @id @default(autoincrement())
   name        String       @db.VarChar(500)
-  description String
+  description String       @default("")
   isActive    Boolean      @default(true)
   permissions Permission[]
   users       User[]

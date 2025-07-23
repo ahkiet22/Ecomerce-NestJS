@@ -12,9 +12,10 @@ import { HttpExceptionFilter } from './common/filters/http-exception.filter'
 import { CommonModule } from './common/common.module'
 import { EmailService } from './libs/email/email.service'
 import { LanguageModule } from './modules/language/language.module'
+import { PermissionModule } from './modules/permission/permission.module'
 
 @Module({
-  imports: [PrismaModule, TokenModule, AuthModule, LanguageModule, CommonModule],
+  imports: [PrismaModule, TokenModule, AuthModule, LanguageModule, PermissionModule, CommonModule],
   controllers: [AppController],
   providers: [
     AppService,
