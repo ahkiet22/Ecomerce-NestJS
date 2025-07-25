@@ -42,7 +42,7 @@ import {
   UnauthorizedAccessException,
 } from './auth.error'
 import { TwoFactorService } from 'src/common/services/2fa.service'
-import { RolesRepository } from 'src/common/repositories/roles.repository'
+import { CommonRolesRepository } from 'src/common/repositories/roles.repository'
 import { InvalidPasswordException } from 'src/common/error'
 
 @Injectable()
@@ -52,7 +52,7 @@ export class AuthService {
     private readonly tokenService: TokenService,
     private readonly authRepository: AuthRepository,
     private readonly commonUserRepository: CommonUserRepository,
-    private readonly rolesRepository: RolesRepository,
+    private readonly rolesRepository: CommonRolesRepository,
     private readonly emailService: EmailService,
     private readonly twoFactorService: TwoFactorService,
   ) {}

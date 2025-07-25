@@ -4,7 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service'
 import { RoleType } from '../models/role.model'
 
 @Injectable()
-export class RolesRepository {
+export class CommonRolesRepository {
   private clientRoleId: number | null = null
   private adminRoleId: number | null = null
 

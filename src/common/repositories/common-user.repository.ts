@@ -13,7 +13,7 @@ export class CommonUserRepository {
   constructor(private readonly prismaService: PrismaService) {}
 
   findUnique(where: WhereUniqueUserType): Promise<UserType | null> {
-    return this.prismaService.user.findUnique({
+    return this.prismaService.user.findFirst({
       where: {
         ...where,
         deletedAt: null,

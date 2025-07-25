@@ -8,7 +8,7 @@ import { HashService } from 'src/libs/crypto/hash.service'
 import { v4 as uuidv4 } from 'uuid'
 import { AuthService } from './auth.service'
 import { GoogleUserInfoError } from './auth.error'
-import { RolesRepository } from 'src/common/repositories/roles.repository'
+import { CommonRolesRepository } from 'src/common/repositories/roles.repository'
 
 @Injectable()
 export class GoogleService {
@@ -16,7 +16,7 @@ export class GoogleService {
   constructor(
     private readonly authRepository: AuthRepository,
     private readonly hashService: HashService,
-    private readonly rolesRepository: RolesRepository,
+    private readonly rolesRepository: CommonRolesRepository,
     private readonly authService: AuthService,
   ) {
     this.oauth2Client = new google.auth.OAuth2(

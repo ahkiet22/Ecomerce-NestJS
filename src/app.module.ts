@@ -15,6 +15,7 @@ import { LanguageModule } from './modules/language/language.module'
 import { PermissionModule } from './modules/permission/permission.module'
 import { RoleModule } from './modules/role/role.module'
 import { ProfileModule } from './modules/profile/profile.module'
+import { UserModule } from './modules/user/user.module'
 
 @Module({
   imports: [
@@ -25,6 +26,7 @@ import { ProfileModule } from './modules/profile/profile.module'
     PermissionModule,
     RoleModule,
     ProfileModule,
+    UserModule,
     CommonModule,
   ],
   controllers: [AppController],
