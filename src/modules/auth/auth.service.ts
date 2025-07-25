@@ -43,6 +43,7 @@ import {
 } from './auth.error'
 import { TwoFactorService } from 'src/common/services/2fa.service'
 import { RolesRepository } from 'src/common/repositories/roles.repository'
+import { InvalidPasswordException } from 'src/common/error'
 
 @Injectable()
 export class AuthService {
@@ -160,12 +161,7 @@ export class AuthService {
 
       const isPasswordMatch = await this.hashService.compare(body.password, user.password)
       if (!isPasswordMatch) {
-        throw new UnauthorizedException([
-          {
-            path: 'password',
-            message: 'Incorrect password',
-          },
-        ])
+        throw InvalidPasswordException
       }
 
       // 2. Nếu user đã bật mã 2FA thì kiểm tra mã 2FA TOTP Code hoặc OTP Code (email)

@@ -14,9 +14,19 @@ import { EmailService } from './libs/email/email.service'
 import { LanguageModule } from './modules/language/language.module'
 import { PermissionModule } from './modules/permission/permission.module'
 import { RoleModule } from './modules/role/role.module'
+import { ProfileModule } from './modules/profile/profile.module'
 
 @Module({
-  imports: [PrismaModule, TokenModule, AuthModule, LanguageModule, PermissionModule, RoleModule, CommonModule],
+  imports: [
+    PrismaModule,
+    TokenModule,
+    AuthModule,
+    LanguageModule,
+    PermissionModule,
+    RoleModule,
+    ProfileModule,
+    CommonModule,
+  ],
   controllers: [AppController],
   providers: [
     AppService,

@@ -11,6 +11,7 @@ import { UserType } from 'src/common/models/user.model'
 import { VerificationCode } from '@prisma/client'
 import { TypeOfVerificationCodeType } from 'src/common/constants/auth.constant'
 import { RoleType } from 'src/common/models/role.model'
+import { WhereUniqueUserType } from 'src/common/repositories/common-user.repository'
 
 @Injectable()
 export class AuthRepository {
@@ -85,22 +86,20 @@ export class AuthRepository {
     return this.prismaService.device.create({ data })
   }
 
-  async findUniqueUserIncludeRole(
-    uniqueObject: { email: string } | { id: number },
-  ): Promise<(UserType & { role: RoleType }) | null> {
+  async findUniqueUserIncludeRole(where: WhereUniqueUserType): Promise<(UserType & { role: RoleType }) | null> {
     return this.prismaService.user.findUnique({
-      where: uniqueObject,
+      where,
       include: {
         role: true,
       },
     })
   }
 
-  async findUniqueRefreshTokenIncludeUserRole(uniqueObject: {
+  async findUniqueRefreshTokenIncludeUserRole(where: {
     token: string
   }): Promise<(RefreshTokenType & { user: UserType & { role: RoleType } }) | null> {
     return this.prismaService.refreshToken.findUnique({
-      where: uniqueObject,
+      where,
       include: {
         user: {
           include: {
@@ -120,9 +119,9 @@ export class AuthRepository {
     })
   }
 
-  deleteRefreshToken(uniqueObject: { token: string }): Promise<RefreshTokenType> {
+  deleteRefreshToken(where: { token: string }): Promise<RefreshTokenType> {
     return this.prismaService.refreshToken.delete({
-      where: uniqueObject,
+      where,
     })
   }
 
