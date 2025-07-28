@@ -16,6 +16,7 @@ import { PermissionModule } from './modules/permission/permission.module'
 import { RoleModule } from './modules/role/role.module'
 import { ProfileModule } from './modules/profile/profile.module'
 import { UserModule } from './modules/user/user.module'
+import { MediaModule } from './modules/media/media.module'
 
 @Module({
   imports: [
@@ -27,6 +28,7 @@ import { UserModule } from './modules/user/user.module'
     RoleModule,
     ProfileModule,
     UserModule,
+    MediaModule,
     CommonModule,
   ],
   controllers: [AppController],

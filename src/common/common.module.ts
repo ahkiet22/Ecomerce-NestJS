@@ -6,6 +6,7 @@ import { APP_GUARD, Reflector } from '@nestjs/core'
 import { AuthenticationGuard } from './guards/auth.guard'
 import { TwoFactorService } from './services/2fa.service'
 import { CommonRolesRepository } from './repositories/roles.repository'
+import { S3Service } from './services/s3.service'
 
 @Global()
 @Module({
@@ -13,6 +14,7 @@ import { CommonRolesRepository } from './repositories/roles.repository'
   providers: [
     Reflector,
     TwoFactorService,
+    S3Service,
     CommonUserRepository,
     CommonRolesRepository,
     {
@@ -20,6 +22,6 @@ import { CommonRolesRepository } from './repositories/roles.repository'
       useClass: AuthenticationGuard,
     },
   ],
-  exports: [CommonUserRepository, TwoFactorService, CommonRolesRepository],
+  exports: [CommonUserRepository, TwoFactorService, S3Service, CommonRolesRepository],
 })
 export class CommonModule {}
