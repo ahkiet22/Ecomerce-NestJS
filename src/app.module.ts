@@ -21,6 +21,8 @@ import { BrandTranslationModule } from './modules/brand/brand-translation/brand-
 import { BrandModule } from './modules/brand/brand.module'
 import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n'
 import path from 'path'
+import { CategoryTranslationModule } from './modules/category/category-translation/category-translation.module'
+import { CategoryModule } from './modules/category/category.module'
 
 @Module({
   imports: [
@@ -44,6 +46,8 @@ import path from 'path'
     MediaModule,
     BrandModule,
     BrandTranslationModule,
+    CategoryModule,
+    CategoryTranslationModule,
     CommonModule,
   ],
   controllers: [AppController],
