@@ -19,6 +19,7 @@
     "noFallthroughCasesInSwitch": false,
     "esModuleInterop": true
   },
+  "include": ["src/**/*", "src/types.ts"],
   "ts-node": {
     "require": ["tsconfig-paths/register"]
   }

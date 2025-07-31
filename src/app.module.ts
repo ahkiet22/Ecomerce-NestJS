@@ -23,6 +23,8 @@ import { AcceptLanguageResolver, I18nModule, QueryResolver } from 'nestjs-i18n'
 import path from 'path'
 import { CategoryTranslationModule } from './modules/category/category-translation/category-translation.module'
 import { CategoryModule } from './modules/category/category.module'
+import { ProductTranslationModule } from './modules/product/product-translation/product-translation.module'
+import { ProductModule } from './modules/product/product.module'
 
 @Module({
   imports: [
@@ -48,6 +50,8 @@ import { CategoryModule } from './modules/category/category.module'
     BrandTranslationModule,
     CategoryModule,
     CategoryTranslationModule,
+    ProductModule,
+    ProductTranslationModule,
     CommonModule,
   ],
   controllers: [AppController],
