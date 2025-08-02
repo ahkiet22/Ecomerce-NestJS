@@ -25,6 +25,8 @@ import { CategoryTranslationModule } from './modules/category/category-translati
 import { CategoryModule } from './modules/category/category.module'
 import { ProductTranslationModule } from './modules/product/product-translation/product-translation.module'
 import { ProductModule } from './modules/product/product.module'
+import { CartModule } from './modules/cart/cart.module'
+import { OrderModule } from './modules/order/order.module'
 
 @Module({
   imports: [
@@ -52,6 +54,8 @@ import { ProductModule } from './modules/product/product.module'
     CategoryTranslationModule,
     ProductModule,
     ProductTranslationModule,
+    CartModule,
+    OrderModule,
     CommonModule,
   ],
   controllers: [AppController],
