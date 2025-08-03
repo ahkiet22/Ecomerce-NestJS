@@ -4,6 +4,8 @@ import { TransformInterceptor } from './common/interceptors/transform.intercepto
 import { AuthenticationGuard } from './common/guards/auth.guard'
 import { NestExpressApplication } from '@nestjs/platform-express'
 import { WebsocketAdapter } from './websockets/websocket.adapter'
+import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
+import { patchNestJsSwagger } from 'nestjs-zod'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -12,6 +14,26 @@ async function bootstrap() {
     origin: 'http://localhost:3300',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
     credentials: true,
+  })
+  patchNestJsSwagger()
+  const config = new DocumentBuilder()
+    .setTitle('Ecommerce API')
+    .setDescription('The API for the ecommerce application')
+    .setVersion('1.0')
+    .addBearerAuth()
+    .addApiKey(
+      {
+        name: 'authorization',
+        type: 'apiKey',
+      },
+      'payment-api-key',
+    )
+    .build()
+  const documentFactory = () => SwaggerModule.createDocument(app, config)
+  SwaggerModule.setup('api', app, documentFactory, {
+    swaggerOptions: {
+      persistAuthorization: true,
+    },
   })
 
   // custom response

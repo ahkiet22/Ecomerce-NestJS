@@ -13,8 +13,10 @@ import { ActiveUser } from 'src/common/decorators/active-user.decorator'
 import { GetUserProfileResDTO, UpdateProfileResDTO } from 'src/common/dtos/shared-user.dto'
 import { MessageResDto } from 'src/common/dtos/response.dto'
 import { ActiveRolePermissions } from 'src/common/decorators/active-role-permissions.decorator'
+import { ApiBearerAuth } from '@nestjs/swagger'
 
 @Controller('users')
+@ApiBearerAuth()
 export class UserController {
   constructor(private readonly userService: UserService) {}
 
