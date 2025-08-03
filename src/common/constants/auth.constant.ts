@@ -4,7 +4,7 @@ export const REQUEST_ROLE_PERMISSIONS = 'role_permissions'
 export const AuthType = {
   Bearer: 'Bearer',
   None: 'None',
-  ApiKey: 'ApiKey',
+  PaymentAPIKey: 'PaymentAPIKey',
 } as const
 
 export type AuthTypeType = (typeof AuthType)[keyof typeof AuthType]
@@ -15,6 +15,12 @@ export const ConditionGuard = {
 } as const
 
 export type ConditionGuardType = (typeof ConditionGuard)[keyof typeof ConditionGuard]
+
+export const UserStatus = {
+  ACTIVE: 'ACTIVE',
+  INACTIVE: 'INACTIVE',
+  BLOCKED: 'BLOCKED',
+} as const
 
 export const TypeOfVerificationCode = {
   REGISTER: 'REGISTER',

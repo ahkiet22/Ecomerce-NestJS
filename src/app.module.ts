@@ -27,9 +27,18 @@ import { ProductTranslationModule } from './modules/product/product-translation/
 import { ProductModule } from './modules/product/product.module'
 import { CartModule } from './modules/cart/cart.module'
 import { OrderModule } from './modules/order/order.module'
+import { PaymentModule } from './modules/payment/payment.module'
+import { BullModule } from '@nestjs/bullmq'
+import envConfig from './configs/validation'
+import { PaymentConsumer } from './queues/payment.consumer'
 
 @Module({
   imports: [
+    BullModule.forRoot({
+      connection: {
+        url: envConfig.REDIS_URL,
+      },
+    }),
     I18nModule.forRoot({
       fallbackLanguage: 'en',
       loaderOptions: {
@@ -56,6 +65,7 @@ import { OrderModule } from './modules/order/order.module'
     ProductTranslationModule,
     CartModule,
     OrderModule,
+    PaymentModule,
     CommonModule,
   ],
   controllers: [AppController],
@@ -72,6 +82,7 @@ import { OrderModule } from './modules/order/order.module'
       provide: APP_FILTER,
       useClass: HttpExceptionFilter,
     },
+    PaymentConsumer,
   ],
 })
 export class AppModule {}
