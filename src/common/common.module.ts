@@ -7,6 +7,8 @@ import { AuthenticationGuard } from './guards/auth.guard'
 import { TwoFactorService } from './services/2fa.service'
 import { CommonRolesRepository } from './repositories/roles.repository'
 import { S3Service } from './services/s3.service'
+import { CommonWebsocketRepository } from './repositories/common-websocket.repository'
+import { CommonPaymentRepository } from './repositories/common-payment.repository'
 
 @Global()
 @Module({
@@ -17,11 +19,20 @@ import { S3Service } from './services/s3.service'
     S3Service,
     CommonUserRepository,
     CommonRolesRepository,
+    CommonWebsocketRepository,
+    CommonPaymentRepository,
     {
       provide: APP_GUARD,
       useClass: AuthenticationGuard,
     },
   ],
-  exports: [CommonUserRepository, TwoFactorService, S3Service, CommonRolesRepository],
+  exports: [
+    TwoFactorService,
+    S3Service,
+    CommonUserRepository,
+    CommonRolesRepository,
+    CommonWebsocketRepository,
+    CommonPaymentRepository,
+  ],
 })
 export class CommonModule {}

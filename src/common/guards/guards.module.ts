@@ -5,6 +5,6 @@ import { ApiKeyGuard } from './api-key.guard'
 import { PaymentAPIKeyGuard } from './payment-api-key.guard'
 @Module({
   providers: [AccessTokenGuard, PaymentAPIKeyGuard],
-  exports: [AccessTokenGuard, ApiKeyGuard, PaymentAPIKeyGuard],
+  exports: [AccessTokenGuard, PaymentAPIKeyGuard],
 })
 export class GuardsModule {}

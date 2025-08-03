@@ -3,6 +3,7 @@ import { AppModule } from './app.module'
 import { TransformInterceptor } from './common/interceptors/transform.interceptor'
 import { AuthenticationGuard } from './common/guards/auth.guard'
 import { NestExpressApplication } from '@nestjs/platform-express'
+import { WebsocketAdapter } from './websockets/websocket.adapter'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
@@ -13,7 +14,12 @@ async function bootstrap() {
     credentials: true,
   })
 
+  // custom response
   app.useGlobalInterceptors(new TransformInterceptor())
+
+  const websocketAdapter = new WebsocketAdapter(app)
+  await websocketAdapter.connectToRedis()
+  app.useWebSocketAdapter(websocketAdapter)
 
   await app.listen(process.env.PORT ?? 3000)
 }
