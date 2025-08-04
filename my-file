@@ -1,0 +1,136 @@
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"NestFactory","msg":"Starting Nest application..."}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"BullModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"PrismaModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"MulterModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"WebsocketModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"ThrottlerModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"JwtModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"DiscoveryModule dependencies initialized"}
+{"level":30,"time":1754325560814,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"CacheModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"LoggerModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"TokenModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"ScheduleModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"BullModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"BullModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"LanguageModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"PermissionModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"RoleModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"BrandModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"BrandTranslationModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"CategoryModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"CategoryTranslationModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"ProductModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"ProductTranslationModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"CartModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"ReviewModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"BullModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"AppModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"ProfileModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"UserModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"GuardsModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"MediaModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"CommonModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"AuthModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"OrderModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"PaymentModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"InstanceLoader","msg":"I18nModule dependencies initialized"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"WebSocketsController","msg":"ChatGateway subscribed to the \"send-message\" message"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"WebSocketsController","msg":"PaymentGateway subscribed to the \"send-money\" message"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"AppController {/}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"AuthController {/auth}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/register, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/otp, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/login, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/refresh-token, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/logout, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/google-link, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/google/callback, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/forgot-password, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/2fa/setup, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/auth/2fa/disable, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"LanguageController {/languages}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/languages, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/languages/:languageId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/languages, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/languages/:languageId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/languages/:languageId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"PermissionController {/permissions}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/permissions, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/permissions/:permissionId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/permissions, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/permissions/:permissionId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/permissions/:permissionId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"RoleController {/roles}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/roles, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/roles/:roleId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/roles, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/roles/:roleId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/roles/:roleId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"ProfileController {/profile}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/profile, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/profile, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/profile/change-password, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"UserController {/users}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/users, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/users/:userId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/users, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/users/:userId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/users/:userId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"MediaController {/media}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/media/images/upload, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/media/static/:filename, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/media/images/upload/presigned-url, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"BrandController {/brands}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brands, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brands/:brandId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brands, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brands/:brandId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brands/:brandId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"BrandTranslationController {/brand-translations}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brand-translations/:brandTranslationId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brand-translations, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brand-translations/:brandTranslationId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/brand-translations/:brandTranslationId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"CategoryController {/categories}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/categories, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/categories/:categoryId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/categories, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/categories/:categoryId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/categories/:categoryId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"CategoryTranslationController {/category-translations}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/category-translations/:categoryTranslationId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/category-translations, POST} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/category-translations/:categoryTranslationId, PUT} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/category-translations/:categoryTranslationId, DELETE} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"ProductController {/products}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/products, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/products/:productId, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"ManageProductController {/manage-product/products}:"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/manage-product/products, GET} route"}
+{"level":30,"time":1754325560815,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/manage-product/products/:productId, GET} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/manage-product/products, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/manage-product/products/:productId, PUT} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/manage-product/products/:productId, DELETE} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"ProductTranslationController {/product-translations}:"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/product-translations/:productTranslationId, GET} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/product-translations, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/product-translations/:productTranslationId, PUT} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/product-translations/:productTranslationId, DELETE} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"CartController {/cart}:"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/cart, GET} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/cart, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/cart/:cartItemId, PUT} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/cart/delete, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"OrderController {/orders}:"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/orders, GET} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/orders, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/orders/:orderId, GET} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/orders/:orderId, PUT} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"PaymentController {/payment}:"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/payment/receiver, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RoutesResolver","msg":"ReviewController {/reviews}:"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/reviews/products/:productId, GET} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/reviews, POST} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"RouterExplorer","msg":"Mapped {/reviews/:reviewId, PUT} route"}
+{"level":30,"time":1754325560816,"pid":201232,"hostname":"DESKTOP-T70Q7A5","context":"I18nService","msg":"Checking translation changes"}

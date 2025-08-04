@@ -6,10 +6,15 @@ import { NestExpressApplication } from '@nestjs/platform-express'
 import { WebsocketAdapter } from './websockets/websocket.adapter'
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger'
 import { patchNestJsSwagger } from 'nestjs-zod'
+import helmet from 'helmet'
+import { Logger } from 'nestjs-pino'
+import { LoggingInterceptor } from './common/interceptors/logging.interceptor'
 
 async function bootstrap() {
-  const app = await NestFactory.create<NestExpressApplication>(AppModule)
+  const app = await NestFactory.create<NestExpressApplication>(AppModule, { bufferLogs: true })
+  app.useLogger(app.get(Logger))
   app.set('trust proxy', 'loopback') // Trust requests from the loopback address
+  app.use(helmet())
   app.enableCors({
     origin: 'http://localhost:3300',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
@@ -38,6 +43,7 @@ async function bootstrap() {
 
   // custom response
   app.useGlobalInterceptors(new TransformInterceptor())
+  // app.useGlobalInterceptors(new LoggingInterceptor())
 
   const websocketAdapter = new WebsocketAdapter(app)
   await websocketAdapter.connectToRedis()
