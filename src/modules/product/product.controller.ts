@@ -1,5 +1,6 @@
 import { Controller, Get, Param, Query } from '@nestjs/common'
 import { ApiParam } from '@nestjs/swagger'
+import { SkipThrottle } from '@nestjs/throttler'
 import { ZodSerializerDto } from 'nestjs-zod'
 import { IsPublic } from 'src/common/decorators/auth.decorator'
 import {
@@ -10,6 +11,7 @@ import {
 } from 'src/modules/product/product.dto'
 import { ProductService } from 'src/modules/product/product.service'
 
+@SkipThrottle()
 @Controller('products')
 @IsPublic()
 export class ProductController {
@@ -23,6 +25,7 @@ export class ProductController {
     })
   }
 
+  @SkipThrottle({ default: false })
   @Get(':productId')
   @ZodSerializerDto(GetProductDetailResDTO)
   @ApiParam({ name: 'productId', type: String })

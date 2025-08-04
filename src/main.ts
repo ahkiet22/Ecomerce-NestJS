@@ -9,7 +9,7 @@ import { patchNestJsSwagger } from 'nestjs-zod'
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule)
-
+  app.set('trust proxy', 'loopback') // Trust requests from the loopback address
   app.enableCors({
     origin: 'http://localhost:3300',
     methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE'],
