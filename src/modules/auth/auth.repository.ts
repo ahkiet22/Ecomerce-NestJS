@@ -45,7 +45,7 @@ export class AuthRepository {
   ): Promise<VerificationCodeType> {
     return this.prismaService.verificationCode.upsert({
       where: {
-        email_code_type: {
+        email_type: {
           email: payload.email,
           type: payload.type,
         },
@@ -62,7 +62,7 @@ export class AuthRepository {
     uniquevalue:
       | { id: number }
       | {
-          email_code_type: {
+          email_type: {
             email: string
             code: string
             type: TypeOfVerificationCodeType
@@ -129,7 +129,7 @@ export class AuthRepository {
     uniqueValue:
       | { id: number }
       | {
-          email_code_type: {
+          email_type: {
             email: string
             code: string
             type: TypeOfVerificationCodeType

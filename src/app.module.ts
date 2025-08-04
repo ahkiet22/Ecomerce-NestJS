@@ -37,9 +37,13 @@ import { ThrottlerBehindProxyGuard } from './common/guards/throttler-behind-prox
 import { ReviewModule } from './modules/review/review.module'
 import { ScheduleModule } from '@nestjs/schedule'
 import { RemoveRefreshTokenCronjobs } from './cronjobs/remove-refresh-token.cron'
+import { CacheModule } from '@nestjs/cache-manager'
 
 @Module({
   imports: [
+    CacheModule.register({
+      isGlobal: true,
+    }),
     ScheduleModule.forRoot(),
     BullModule.forRoot({
       connection: {
