@@ -34,6 +34,7 @@ import { PaymentConsumer } from './queues/payment.consumer'
 import { WebsocketModule } from './websockets/websocket.module'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { ThrottlerBehindProxyGuard } from './common/guards/throttler-behind-proxy.guard'
+import { ReviewModule } from './modules/review/review.module'
 
 @Module({
   imports: [
@@ -83,6 +84,7 @@ import { ThrottlerBehindProxyGuard } from './common/guards/throttler-behind-prox
     CartModule,
     OrderModule,
     PaymentModule,
+    ReviewModule,
     WebsocketModule,
     CommonModule,
   ],
