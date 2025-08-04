@@ -38,11 +38,17 @@ import { ReviewModule } from './modules/review/review.module'
 import { ScheduleModule } from '@nestjs/schedule'
 import { RemoveRefreshTokenCronjobs } from './cronjobs/remove-refresh-token.cron'
 import { CacheModule } from '@nestjs/cache-manager'
+import { createKeyv } from '@keyv/redis'
 
 @Module({
   imports: [
     CacheModule.register({
       isGlobal: true,
+      useFactory: () => {
+        return {
+          stores: [createKeyv(envConfig.REDIS_URL)],
+        }
+      },
     }),
     ScheduleModule.forRoot(),
     BullModule.forRoot({
