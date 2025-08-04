@@ -35,9 +35,12 @@ import { WebsocketModule } from './websockets/websocket.module'
 import { ThrottlerModule } from '@nestjs/throttler'
 import { ThrottlerBehindProxyGuard } from './common/guards/throttler-behind-proxy.guard'
 import { ReviewModule } from './modules/review/review.module'
+import { ScheduleModule } from '@nestjs/schedule'
+import { RemoveRefreshTokenCronjobs } from './cronjobs/remove-refresh-token.cron'
 
 @Module({
   imports: [
+    ScheduleModule.forRoot(),
     BullModule.forRoot({
       connection: {
         url: envConfig.REDIS_URL,
@@ -107,6 +110,7 @@ import { ReviewModule } from './modules/review/review.module'
       useClass: ThrottlerBehindProxyGuard,
     },
     PaymentConsumer,
+    RemoveRefreshTokenCronjobs,
   ],
 })
 export class AppModule {}
